@@ -1,6 +1,7 @@
 from string import punctuation, digits
 import numpy as np
 import random
+import ipdb
 
 # Part I
 
@@ -36,7 +37,15 @@ def hinge_loss_single(feature_vector, label, theta, theta_0):
     Returns: A real number representing the hinge loss associated with the
     given data point and parameters.
     """
-    
+    # dot product of theta and feature vector
+    # ipdb.set_trace()
+    agreement = label * (np.dot(theta, feature_vector) + theta_0)
+    if agreement >= 1:
+        hinge_loss = 0
+    else:
+        hinge_loss = 1-agreement
+
+    return hinge_loss
 #pragma: coderesponse end
 
 
