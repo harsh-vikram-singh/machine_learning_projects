@@ -1,2 +1,4 @@
 *.txt
 *.tsv
+*__pycache__
+*.vscode*

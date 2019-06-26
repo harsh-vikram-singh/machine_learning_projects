@@ -2,7 +2,7 @@ import os
 import sys
 import time
 import traceback
-import project1 as p1
+import classifiers as p1
 import numpy as np
 
 verbose = False
@@ -439,20 +439,20 @@ def check_extract_bow_feature_vectors():
         return
 
 def main():
-    log(green("PASS"), "Import project1")
+    log(green("PASS"), "Import classifiers")
     try:
-        check_get_order()
+        # check_get_order()
         check_hinge_loss_single()
-        check_hinge_loss_full()
-        check_perceptron_single_update()
-        check_perceptron()
-        check_average_perceptron()
-        check_pegasos_single_update()
-        check_pegasos()
-        check_classify()
-        check_classifier_accuracy()
-        check_bag_of_words()
-        check_extract_bow_feature_vectors()
+        # check_hinge_loss_full()
+        # check_perceptron_single_update()
+        # check_perceptron()
+        # check_average_perceptron()
+        # check_pegasos_single_update()
+        # check_pegasos()
+        # check_classify()
+        # check_classifier_accuracy()
+        # check_bag_of_words()
+        # check_extract_bow_feature_vectors()
     except Exception:
         log_exit(traceback.format_exc())
 
