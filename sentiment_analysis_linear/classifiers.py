@@ -40,6 +40,7 @@ def hinge_loss_single(feature_vector, label, theta, theta_0):
     # dot product of theta and feature vector
     # ipdb.set_trace()
     agreement = label * (np.dot(theta, feature_vector) + theta_0)
+
     if agreement >= 1:
         hinge_loss = 0
     else:
@@ -70,10 +71,16 @@ def hinge_loss_full(feature_matrix, labels, theta, theta_0):
     """
     hinge_loss = 0
     # trying to implement the vectorized implementation of calculating hinge loss
-    agreement = labels * (np.matmul(theta.T, feature_matrix) + theta_0)
+    agreement = labels * (np.matmul(theta, feature_matrix.T) + theta_0)
     for z in agreement:
         if z < 1:
             hinge_loss += 1 - z
+
+    # implementing a non vectorized version:
+    # for feature_vector, label in zip(feature_matrix, labels):
+
+    #     hinge_loss += hinge_loss_single(feature_vector, label,
+    #                                     theta, theta_0)
 
     return hinge_loss / len(labels)
 
