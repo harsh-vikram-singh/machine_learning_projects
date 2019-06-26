@@ -36,8 +36,7 @@ def hinge_loss_single(feature_vector, label, theta, theta_0):
     Returns: A real number representing the hinge loss associated with the
     given data point and parameters.
     """
-    # Your code here
-    raise NotImplementedError
+    
 #pragma: coderesponse end
 
 
@@ -60,8 +59,8 @@ def hinge_loss_full(feature_matrix, labels, theta, theta_0):
     given dataset and parameters. This number should be the average hinge
     loss across all of the points in the feature matrix.
     """
-    # Your code here
-    raise NotImplementedError
+    
+    pass
 #pragma: coderesponse end
 
 
