@@ -466,7 +466,7 @@ def main():
         # check_get_order()
         check_hinge_loss_single()
         check_hinge_loss_full()
-        # check_perceptron_single_update()
+        check_perceptron_single_update()
         # check_perceptron()
         # check_average_perceptron()
         # check_pegasos_single_update()

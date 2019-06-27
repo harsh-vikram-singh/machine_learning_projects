@@ -110,8 +110,10 @@ def perceptron_single_step_update(
     real valued number with the value of theta_0 after the current updated has
     completed.
     """
-    # Your code here
-    raise NotImplementedError
+    theta = current_theta + label * feature_vector
+    theta_0 = current_theta_0 + label
+
+    return (theta, theta_0)
 # pragma: coderesponse end
 
 
