@@ -193,16 +193,16 @@ def average_perceptron(feature_matrix, labels, T):
     theta = np.zeros((feature_matrix.shape[1],))
     theta_0 = 0
     theta_avg, theta_0_avg = 0, 0
+    nT = 0
     for t in range(T):
         for i in get_order(feature_matrix.shape[0]):
-            hinge_loss = hinge_loss_single(feature_matrix[i], labels[i], theta, theta_0)
-            if hinge_loss > 0:
-                theta, theta_0 = perceptron_single_step_update(feature_matrix[i], labels[i], theta, theta_0)
-        theta_avg += theta
-        theta_0_avg += theta_0    
+            nT += 1
+            theta, theta_0 = perceptron_single_step_update(feature_matrix[i], labels[i], theta, theta_0)
+            theta_avg += theta
+            theta_0_avg += theta_0    
 
 
-    return (theta_avg/T, theta_0_avg/T)
+    return (theta_avg/nT, theta_0_avg/nT)
     # pragma: coderesponse end
 
 
