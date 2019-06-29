@@ -110,8 +110,13 @@ def perceptron_single_step_update(
     real valued number with the value of theta_0 after the current updated has
     completed.
     """
-    theta = current_theta + label * feature_vector
-    theta_0 = current_theta_0 + label
+    epsilon = 0.0000001
+    theta = current_theta
+    theta_0 = current_theta_0
+    percep_loss = label * (np.dot(current_theta, feature_vector) + current_theta_0)
+    if percep_loss <= epsilon:
+        theta = current_theta + label * feature_vector   
+        theta_0 = current_theta_0 + label
 
     return (theta, theta_0)
 # pragma: coderesponse end
@@ -144,12 +149,15 @@ def perceptron(feature_matrix, labels, T):
     the feature matrix.
     """
     # Your code here
+    epsilon = 0.0000001
     theta = np.zeros((feature_matrix.shape[1],))
     theta_0 = 0
     for t in range(T):
         for i in get_order(feature_matrix.shape[0]):
-            theta, theta_0 = perceptron_single_step_update(feature_matrix[i], labels[i], theta, theta_0)
-
+            perceptron_loss = labels[i]*(np.dot(theta, feature_matrix[i]) + theta_0)
+            if perceptron_loss <= epsilon:
+                theta = theta + labels[i]*feature_matrix[i]
+                theta_0 = theta_0 + labels[i]
     return (theta, theta_0)
             
 # pragma: coderesponse end
@@ -185,9 +193,21 @@ def average_perceptron(feature_matrix, labels, T):
     Hint: It is difficult to keep a running average; however, it is simple to
     find a sum and divide.
     """
-    # Your code here
-    raise NotImplementedError
-# pragma: coderesponse end
+
+    theta = np.zeros((feature_matrix.shape[1],))
+    theta_0 = 0
+    theta_avg, theta_0_avg = 0, 0
+    for t in range(T):
+        for i in get_order(feature_matrix.shape[0]):
+            hinge_loss = hinge_loss_single(feature_matrix[i], labels[i], theta, theta_0)
+            if hinge_loss > 0:
+                theta, theta_0 = perceptron_single_step_update(feature_matrix[i], labels[i], theta, theta_0)
+        theta_avg += theta
+        theta_0_avg += theta_0    
+
+
+    return (theta_avg/T, theta_0_avg/T)
+    # pragma: coderesponse end
 
 
 # pragma: coderesponse template
