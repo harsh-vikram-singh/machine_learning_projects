@@ -308,12 +308,20 @@ def classify(feature_matrix, theta, theta_0):
         theta_0 - A real valued number representing the offset parameter.
 
     Returns: A numpy array of 1s and -1s where the kth element of the array is
-    the predicted classification of the kth row of the feature matrix using the
+    the predicted classification of the kth row of eethe feature matrix using the
     given theta and theta_0. If a prediction is GREATER THAN zero, it should
     be considered a positive classification.
     """
-    # Your code here
-    raise NotImplementedError
+    epsilon = 0.0000001
+    prediction_list = []
+    for i in range(feature_matrix.shape[0]):
+        pred = np.dot(theta, feature_matrix[i]) + theta_0
+        if pred < epsilon:
+            prediction_list.append(-1)
+        else:
+            prediction_list.append(1)
+    return np.array(prediction_list)
+
 # pragma: coderesponse end
 
 
@@ -350,8 +358,15 @@ def classifier_accuracy(
     trained classifier on the training data and the second element is the
     accuracy of the trained classifier on the validation data.
     """
-    # Your code here
-    raise NotImplementedError
+    # use the classifiers defined earlier to get trained parameter vectors.
+    # use the trained parameters to classify using the function with the name
+    # classify
+    theta, theta_0 = classifier(train_feature_matrix, train_labels, **kwargs)
+    train_predictions = classify(train_feature_matrix, theta, theta_0)
+    validation_predictions = classify(val_feature_matrix, theta, theta_0)
+    train_accuracy = accuracy(train_predictions, train_labels)
+    validation_accuracy = accuracy(validation_predictions, val_labels)
+    return (train_accuracy, validation_accuracy)
 # pragma: coderesponse end
 
 
